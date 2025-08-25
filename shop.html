@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarEco - Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+  <header>
+        <div class="container fade-in-right">
+            <nav class="navbar">
+                <div class="logo"><a href="index.html" style=" color: inherit; text-decoration: none;">
+                    <div style="background: var(--primary); color: white; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-right: 12px;">
+                        <i class="fas fa-sun fa-2x"></i>
+                    </div></a>
+                    <h1><a href="index.html" style="color: inherit; text-decoration: none;">SolarEco</a></h1>
+                </div>
+                
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href=" index.html#products">Shop Now</a></li>
+                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a href="index.html#testimonials">Feedback</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                    
+                    <div class="nav-buttons">             
+                      <!-- Battery Toggle -->
+                      <div id="batteryToggle" class="battery-toggle" title="Toggle Theme">
+                        <div class="battery">
+                          <div class="charge"></div>
+                          <div class="tip"></div>
+                        </div>
+                      </div>
+
+                      <!-- Calculator Toggle -->
+                      <div id="calculatorToggle" class="calculator-toggle" title="Solar Calculator">
+                        <button><a href="calculator.html">Calculator</a></button>
+                      </div>
+                    </div>
+                </div>
+                
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Shop Hero Section -->
+    <section class="shop-hero" style="background: linear-gradient(rgba(10, 108, 116, 0.85), rgba(68, 106, 109, 0.85)), url('data:image/jpeg;base64,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'); 
+    background-size: cover; height: 550px; background-position: center; color: white; padding: 150px 0 80px; text-align: center; margin-top: 70px;">
+        <div class="container fade-in-up" style="opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out;">
+            <h1 style="color: white;">Solar Products Shop</h1>
+            <p>Unlock the sun's full potential and transform your energy experience. Our premium solar panels are engineered for maximum efficiency, seamlessly integrating with your roof to generate significant savings from day one. They require minimal maintenance, come with a robust warranty, and increase your property value. This is your chance to gain energy independence, protect yourself from unpredictable rate hikes, and power your life with clean, reliable energy. The future of energy is on your roof.</p>
+        </div>
+    </section>
+
+
+    <!-- Filter Section -->
+    <section class="filter-section fade-in">
+        <div class="container">
+            <div class="filter-group">
+                <h3>Categories</h3>
+                <div class="filter-options">
+                    <button class="filter-btn active"><a href="shop.html">All</a></button>
+                    <button class="filter-btn"><a href="panel.html">Solar Panels</a></button>
+                    <button class="filter-btn"><a href="inverter.html">Inverters</a></button>
+                    <button class="filter-btn"><a href="battery.html">Batteries</a></button>
+                    <button class="filter-btn"><a href="VFDS.html">VFD'S</a></button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <h2 class="fade-in-up"> Solar Products</h2>
+            <div class="products-grid">
+
+                <!-- Product 1 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-badge pulse">Best Seller</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-2025-07-21T094623.684-300x300.png" alt="Solar Panel">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">LONGi Hi-MO X7 590W Bifacial Panel</h3>
+                        <div class="product-price">18,585 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- Product 2 -->
+                <div class="product-card fade-in delay-2">
+                    <div class="product-badge">New</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-2025-07-10T104202.893-300x300.png" alt="Solar Inverter">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Tongwei 615W N-Type Bifacial Solar</h3>
+                        <div class="product-price">17,220 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                      <!-- Product 3 -->
+                <div class="product-card fade-in delay-4">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/05/Untitled-design-82-300x300.png" alt="Mounting Structure">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">AIKO 635W SW Bifacial Solar Panel</h3>
+                        <div class="product-price">22,225 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- Product 4 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-badge pulse">Best Seller</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-06T172557.575-300x300.png" alt="Solar Panel">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">SolarMax LFP 5.12K Lithium Battery</h3>
+                        <div class="product-price">275,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 5 -->
+                <div class="product-card fade-in delay-2">
+                    <div class="product-badge">New</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-01T164957.357-300x300.png" alt="Solar Inverter">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Dyness DL 5.0C Lithium Battery with WiF</h3>
+                        <div class="product-price">245,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 6 -->
+                <div class="product-card fade-in delay-3">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-2025-07-18T114533.373-300x300.png" alt="Solar Battery">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Growatt Hope 5.5L-A1 Battery</h3>
+                        <div class="product-price">225,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-badge pulse">Best Seller</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-2025-07-31T165124.349-300x300.png" alt="Solar Panel">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Itel 4kW Regular IP54 Hybrid Inverter</h3>
+                        <div class="product-price">133,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card fade-in delay-2">
+                    <div class="product-badge">New</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-02T131826.670-300x300.png" alt="Solar Inverter">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Itel 6kW IP66 Hybrid Inverter</h3>
+                        <div class="product-price">220,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                                <!-- Product 9 -->
+                <div class="product-card fade-in delay-3">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-01T154404.676-300x300.png" alt="Solar Battery">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Itel 6kW Pro IP54 Hybrid Inverter</h3>
+                        <div class="product-price">148,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 10 -->
+                <div class="product-card fade-in delay-4">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-4-300x300.png" alt="Mounting Structure">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">MaxPower Voltas 6kW-H6 Hybrid Inverter</h3>
+                        <div class="product-price">238,000</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 11 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-badge pulse">Best Seller</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-06T105704.708-300x300.png" alt="Solar Panel">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Invt GD100 4kW VFD Orignal</h3>
+                        <div class="product-price">59,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 12 -->
+                <div class="product-card fade-in delay-2">
+                    <div class="product-badge">New</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-06T105704.708-1-300x300.png" alt="Solar Inverter">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Invt GD100 5.5kW Solar VFD Orignal</h3>
+                        <div class="product-price">69,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 13 -->
+                <div class="product-card fade-in delay-3">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-06T105704.708-2-300x300.png" alt="Solar Battery">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">INVT GD100 7.5kW VFD Orignal</h3>
+                        <div class="product-price">89,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 14 -->
+                <div class="product-card fade-in delay-5">
+                    <div class="product-badge">Sale</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-2025-07-12T105501.853-300x300.png" alt="Solar Charge Controller">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">MaxPower PV Tech 5000 Hybrid Inverter</h3>
+                        <div class="product-price">76,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- Product 15 -->
+                <div class="product-card fade-in delay-6">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-2025-07-10T131528.795-300x300.png" alt="Solar Cable">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Knox 10kW G4 Ongrid Inverter</h3>
+                        <div class="product-price">160,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 16 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/05/Sunsolar-products-2-300x300.png" alt="Solar Connector">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Auxosol 10kw Ongrid inverter</h3>
+                        <div class="product-price">175,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <!-- Product 17 -->
+                <div class="product-card fade-in delay-4">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-2025-07-18T114533.373-1-300x300.png" alt="Mounting Structure">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">SunFLX FixWall 5.0 Lithium Battery</h3>
+                        <div class="product-price">210,225 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 18 -->
+                <div class="product-card fade-in delay-5">
+                    <div class="product-badge">Sale</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-2025-07-07T131653.529-300x300.png" alt="Solar Charge Controller">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Dyness HV Stack100 Lithium Battery</h3>
+                        <div class="product-price">275,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 19 -->
+                <div class="product-card fade-in delay-6">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/05/Untitled-design-66-300x300.png" alt="Solar Cable">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">PylonTech UP2500 Lithium Ion Battery</h3>
+                        <div class="product-price">170,998 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 20 -->
+                <div class="product-card fade-in delay-4">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-06T105704.708-3-300x300.png" alt="Mounting Structure">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">INVT GD100 11kW VFD Origna</h3>
+                        <div class="product-price">115,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 21 -->
+                <div class="product-card fade-in delay-5">
+                    <div class="product-badge">Sale</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-06T105704.708-4-300x300.png" alt="Solar Charge Controller">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">INVT GD100 15kW VFD Orignal</h3>
+                        <div class="product-price">135,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- Product 22 -->
+                <div class="product-card fade-in delay-5">
+                    <div class="product-badge">Sale</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/05/Design-ohne-Titel-36-1-300x300.png" alt="Solar Charge Controller">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Astronergy 575W N-Type Bifacial</h3>
+                        <div class="product-price">15,813 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 23 -->
+                <div class="product-card fade-in delay-6">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/01/Design-ohne-Titel-36-2-300x300.png" alt="Solar Cable">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Astronergy 585W N-Type BifaciaL</h3>
+                        <div class="product-price">17,998 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 24 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/05/Design-ohne-Titel-36-300x300.png" alt="Solar Connector">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Astronergy 590W N-Type Bifacial</h3>
+                        <div class="product-price">17,500 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 25 -->
+                <div class="product-card fade-in delay-2">
+                    <div class="product-badge">Eco Choice</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/01/Design-ohne-Titel-36-300x300.png" alt="Solar Water Pump">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Astronergy 605W N-Type Bifacial</h3>
+                        <div class="product-price">17,696 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- Product 26 -->
+                <div class="product-card fade-in delay-6">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/08/Untitled-design-2025-08-06T105704.708-5-300x300.png" alt="Solar Cable">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">INVT GD100 18.5kW VFD Orignal</h3>
+                        <div class="product-price">165,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 27 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/01/Untitled-design-74-300x300.png" alt="Solar Connector">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Invent VFD 5/7kW</h3>
+                        <div class="product-price">65,500 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- Product 28 -->
+                <div class="product-card fade-in delay-3">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/05/Design-ohne-Titel-37-2-300x300.png" alt="Solar Street Light">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Astronergy 610W Bifacial Solar Panel</h3>
+                        <div class="product-price">18,760 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 29 -->
+                <div class="product-card fade-in delay-4">
+                    <div class="product-badge">Limited</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/01/Design-ohne-Titel-33-300x300.png" alt="Solar Panel Kit">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Canadian Solar 585W Monofacial</h3>
+                        <div class="product-price">21,060 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 30 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/01/Sunsolar-products-18-1-300x300.png" alt="Solar Connector">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Dyness HV 3.55kw Battery</h3>
+                        <div class="product-price">245,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 31 -->
+                <div class="product-card fade-in delay-2">
+                    <div class="product-badge">Eco Choice</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/07/Untitled-design-2025-07-10T102026.377-300x300.png" alt="Solar Water Pump">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">MaxPower MP32000 Lithium Battery</h3>
+                        <div class="product-price">1,068,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 32 -->
+                <div class="product-card fade-in delay-3">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/06/Untitled-design-2025-06-03T163622.690-300x300.png" alt="Solar Street Light">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">MAXPOWER MP10000 Ultra Lithium Battery</h3>
+                        <div class="product-price">450,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>    
+
+                     <!-- Product 33 -->
+                <div class="product-card fade-in delay-2">
+                    <div class="product-badge">Eco Choice</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/06/Untitled-design-12-300x300.png" alt="Solar Water Pump">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">GoodWe 5kW OnGrid Inverte</h3>
+                        <div class="product-price">175,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 34 -->
+                <div class="product-card fade-in delay-3">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/05/Sunsolar-products-5-300x300.png" alt="Solar Street Light">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Fox 6kw Inverter Ongrid</h3>
+                        <div class="product-price">120,760 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 35 -->
+                <div class="product-card fade-in delay-4">
+                    <div class="product-badge">Limited</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/02/Untitled-design-51-300x300.png" alt="Solar Panel Kit">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Canadian Solar 585W Monofacial</h3>
+                        <div class="product-price">21,060 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 36 -->
+                <div class="product-card fade-in delay-5">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/01/Sunsolar-products-21-300x300.png" alt="Solar Inverter">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Huawei 25KW Ongrid Inverterl</h3>
+                        <div class="product-price">319,305 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 37 -->
+                <div class="product-card fade-in delay-6">
+                    <div class="product-badge">Popular</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/01/Untitled-design-55-300x300.png" alt="Solar Panel">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Inverex 20KW Ongrid Inverter</h3>
+                        <div class="product-price">470,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 38 -->
+                <div class="product-card fade-in delay-5">
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/01/Design-ohne-Titel-41-1-300x300.png" alt="Solar Inverter">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Invent VFD 30/37kW</h3>
+                        <div class="product-price">155,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 39 -->
+                <div class="product-card fade-in delay-6">
+                    <div class="product-badge">Popular</div>
+                    <div class="product-image hover-zoom">
+                        <img src="https://sunsolar.pk/wp-content/uploads/2025/01/Untitled-design-77-300x300.png" alt="Solar Panel">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Invent VFD 37/45kW</h3>
+                        <div class="product-price">155,000 PKR</div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+   <!-- FOOTER -->
+  <footer>
+    <div class="container fade-in-up">
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="logo">
+                    <div style="background: var(--secondary); color: var(--dark); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-right: 12px;">
+                        <a href="index.html#home" style=" color: inherit; text-decoration: none;">
+                            <i class="fas fa-sun fa-2x"></i></a>
+                    </div>
+                    <h1 style="color: white;"><a href="#home" style=" color: inherit; text-decoration: none;">
+                        SolarEco</a></h1>
+                </div>
+                <p style="margin: 20px 0; color: #adb5bd;">Providing sustainable solar solutions for homes and businesses since 2010.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://pk.linkedin.com/company/sign-in-private-limited"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="residentialsolar.html">Residential Solar</a></li>
+                    <li><a href="comercia.solar.html">Commercial Solar</a></li>
+                    <li><a href="installtion.html">Solar Installation</a></li>
+                    <li><a href="maintainance.html">Maintenance & Repair</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Subscribe</h3>
+                <p style="color: #adb5bd; margin-bottom: 20px;">Subscribe to our Page for the latest updates and offers.</p>
+                <form id="subscribeForm">
+                    <div class="form-group">
+                        <input type="email" id="footerEmail" class="form-control" placeholder="Your Email Address" required>
+                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2010 SolarEco. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle - updated for new structure
+const mobileMenuBtn = document.querySelector('.mobile-menu');
+const navContainer = document.querySelector('.nav-container');
+
+mobileMenuBtn.addEventListener('click', () => {
+    navContainer.classList.toggle('active');
+});
+
+// Close menu when clicking on links
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navContainer.classList.remove('active');
+    });
+});
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                navLinks.classList.remove('active');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Sticky header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+
+        // Wishlist button toggle
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                this.innerHTML = this.classList.contains('active') 
+                    ? '<i class="fas fa-heart"></i>' 
+                    : '<i class="far fa-heart"></i>';
+            });
+        });
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in, .fade-in-up, .fade-in-left, .fade-in-right, .scale-in, .rotate-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize animations on load
+        window.addEventListener('load', () => {
+            animateOnScroll();
+            
+            // Animate hero content with a slight delay
+            const heroContent = document.querySelector('.shop-hero .container');
+            if (heroContent) {
+                setTimeout(() => {
+                    heroContent.style.opacity = '1';
+                    heroContent.style.transform = 'translateY(0)';
+                }, 300);
+            }
+        });
+
+        // Animate on scroll
+        window.addEventListener('scroll', animateOnScroll);
+
+        // battery tooglr
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("batteryToggle");
+    document.body.classList.add("light-theme");
+
+    toggle.addEventListener("click", function () {
+      document.body.classList.toggle("light-theme");
+      document.body.classList.toggle("dark-theme");
+    });
+  });
+
+  
+//   add to chart alert box
+document.addEventListener('DOMContentLoaded', function() {
+  // Get all Add to Cart buttons
+  const addToCartButtons = document.querySelectorAll('.btn-primary');
+  
+  // Add click event to each button
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Get product information
+      const productCard = this.closest('.product-card');
+      const productName = productCard.querySelector('.product-title').textContent;
+      const productPrice = productCard.querySelector('.product-price').textContent;
+      
+      // Show alert with product details
+      alert(`Added to Cart:\n${productName}\n${productPrice}`);
+      
+      // Optional: Add visual feedback (button animation)
+      this.classList.add('clicked');
+      setTimeout(() => {
+        this.classList.remove('clicked');
+      }, 300);
+    });
+  });
+});
+
+    </script>
+</body>
+</html>

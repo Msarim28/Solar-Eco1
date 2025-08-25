@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Solar Energy Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+             --primary: #0a6c74;
+             --secondary: #0a6c74;
+              --accent: #ff6b35;
+              --light: #f8f9fa;
+              --dark: #212529;
+             --gray: #6c757d;
+              --transition: all 0.3s ease;
+              
+              /* Light theme variables */
+              --bg-color: #f5f7fa;
+              --text-color: #212529;
+              --panel-bg: white;
+              --header-bg: white;
+              --footer-bg: #212529;
+              --footer-text: white;
+              --input-bg: white;
+              --input-border: #ddd;
+              --card-bg: white;
+              --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Dark theme variables */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --panel-bg: #1e1e1e;
+            --header-bg: #1a1a1a;
+            --footer-bg: #1a1a1a;
+            --footer-text: #e0e0e0;
+            --input-bg: #2d2d2d;
+            --input-border: #444;
+            --card-bg: #2d2d2d;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+           font-family: 'Raleway', sans-serif;
+        }
+        
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        
+/* Header Styles */
+header {
+    background-color: var(--header-bg);
+    box-shadow: 0 2px 10px var(--shadow-color);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--primary);
+    
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li  {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    font-size: 0.9rem;
+    
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links a:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: var(--transition);
+}
+
+.nav-links a:hover:after {
+    width: 100%;
+}
+
+.mobile-menu {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* Add these styles to your existing CSS */
+
+.nav-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile menu styles */
+@media (max-width: 768px) {
+    .mobile-menu {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    
+    .nav-container {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        background: white;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: var(--transition);
+        z-index: 1000;
+    }
+    
+    .nav-container.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .nav-links li {
+        margin: 15px 0;
+        text-align: center;
+    }
+    
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+    
+    /* Dark theme adjustments for mobile */
+    body.dark-theme .nav-container {
+        background: #1e1e1e;
+    }
+}
+
+/* For larger screens */
+@media (min-width: 769px) {
+    .nav-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-links {
+        display: flex;
+        list-style: none;
+        margin-right: 20px;
+    }
+    
+    .nav-links li {
+        margin-left: 20px;
+    }
+    
+    .mobile-menu {
+        display: none;
+    }
+}
+/* battery */
+
+.battery-toggle {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.battery {
+  width: 40px;
+  height: 20px;
+  border: 2px solid var(--text-color);
+  border-radius: 4px;
+  position: relative;
+  background: #ccc;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.battery .tip {
+  position: absolute;
+  right: -6px;
+  width: 6px;
+  height: 10px;
+  background: var(--text-color);
+  top: 5px;
+  border-radius: 2px;
+}
+
+.battery .charge {
+  height: 100%;
+  transition: width 0.4s, background 0.4s;
+}
+
+/* Light Mode Battery = Full */
+body:not([data-theme="dark"]) .battery .charge {
+  width: 100%;
+  background: limegreen;
+  animation: pulseCharge 1s infinite;
+}
+
+/* Dark Mode Battery = Low */
+body[data-theme="dark"] .battery .charge {
+  width: 20%;
+  background: red;
+  animation: none;
+}
+
+@keyframes pulseCharge {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.nav-links a {
+  color: var(--text-color);
+}
+.logo h1 {
+  color: var(--text-color);
+}
+
+/* Validation Alert Styles */
+.alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
+    max-width: 350px;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    display: flex;
+    align-items: center;
+    animation: slideInRight 0.3s ease;
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.alert.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.alert.hide {
+    animation: slideOutRight 0.3s ease forwards;
+}
+
+.alert-error {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}
+
+.alert-warning {
+    background-color: #fff8e1;
+    color: #f57c00;
+    border-left: 4px solid #f57c00;
+}
+
+.alert-icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.alert-close {
+    margin-left: auto;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.input-error {
+    border-color: #c62828 !important;
+    box-shadow: 0 0 0 2px rgba(198, 40, 40, 0.1) !important;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.input-highlight {
+    animation: highlight 1.5s ease;
+}
+
+@keyframes highlight {
+    0% { box-shadow: 0 0 0 0 rgba(10, 108, 116, 0.5); }
+    50% { box-shadow: 0 0 0 10px rgba(10, 108, 116, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(10, 108, 116, 0); }
+}
+        
+
+        /* CALCULATION CSS */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            flex: 1;
+        }
+        
+        .Header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease;
+            padding-top: 100px;
+        }
+        
+        .Header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .Header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease;
+        }
+        
+        @media (max-width: 900px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .panel {
+            background: var(--panel-bg);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+        
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+        
+        .panel-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--primary);
+            color: var(--text-color);
+        }
+        
+        .panel-title i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--input-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            margin-top: 1rem;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .results-panel {
+            grid-column: span 2;
+            animation: fadeIn 1.2s ease;
+        }
+        
+        @media (max-width: 900px) {
+            .results-panel {
+                grid-column: span 1;
+            }
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .result-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            text-align: center;
+            transition: var(--transition);
+            border-top: 4px solid var(--primary);
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .result-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+        }
+        
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        
+        .progress-container {
+            margin: 2rem 0;
+        }
+        
+        .progress-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+        
+        .panel-recommendation {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+            animation: fadeIn 1s ease;
+        }
+        
+        .panel-recommendation h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .panel-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .panel-option {
+            flex: 1;
+            min-width: 200px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border-top: 3px solid var(--secondary);
+            transition: var(--transition);
+        }
+        
+        .panel-option:hover {
+            transform: translateY(-5px);
+        }
+        
+        .panel-option h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .panel-specs {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .panel-price {
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        
+        .environmental-benefits {
+            margin-top: 2rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .benefit-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(46, 204, 113, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+        }
+        
+        .benefit-text h4 {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+        
+        .benefit-text p {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }    
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .rotate {
+            animation: rotate 2s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer Styles */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 40px 0 20px;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--footer-text);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #adb5bd;
+            font-size: 0.8rem;
+        }
+        .form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(10, 108, 116, 0.1);
+}
+
+
+        /* Chat Container */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-width: 90%;
+            height: 350px;
+            background: var(--panel-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Chat Header */
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 14px;
+            color: white;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Chat Messages */
+        .chat-messages {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            background: var(--card-bg);
+            font-size: 0.9rem;
+        }
+
+        .message {
+            margin-bottom: 12px;
+            max-width: 80%;
+            padding: 8px 10px;
+            border-radius: 5px;
+            word-wrap: break-word;
+            font-size: 0.9rem;
+        }
+
+        .user-message {
+            background: #e3f2fd;
+            margin-left: auto;
+            border-top-right-radius: 0;
+            color: #1a1a1a;
+        }
+
+        .bot-message {
+            background: #f1f1f1;
+            margin-right: auto;
+            border-top-left-radius: 0;
+            color: #1a1a1a;
+        }
+
+        /* Chat Input */
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid var(--input-border);
+            background: var(--panel-bg);
+        }
+
+        #message-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid var(--input-border);
+            border-radius: 5px;
+            outline: none;
+            font-size: 0.9rem;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        #send-btn {
+            margin-left: 8px;
+            padding: 8px 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        #send-btn:hover {
+            background: var(--gray);
+        }
+
+        /* Chat Toggle Button */
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            z-index: 999;
+        }
+
+        .chat-toggle i {
+            font-size: 20px;
+        }
+
+        /* Animation */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .footer-column {
+                flex: 1 1 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                background: var(--header-bg);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px var(--shadow-color);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+      <!-- Header  -->
+    <header>
+        <div class="container fade-in-right">
+            <nav class="navbar">
+                <div class="logo"><a href="index.html" style=" color: inherit; text-decoration: none;">
+                    <div style="background: var(--primary); color: white; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-right: 12px;">
+                        <i class="fas fa-sun fa-2x"></i>
+                    </div></a>
+                    <h1><a href="index.html" style="color: inherit; text-decoration: none;">SolarEco</a></h1>
+                </div>
+                
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href=" index.html#products">Shop Now</a></li>
+                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a href="index.html#testimonials">Feedback</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                    
+                    <div class="nav-buttons">             
+                      <!-- Battery Toggle -->
+                      <div id="batteryToggle" class="battery-toggle" title="Toggle Theme">
+                        <div class="battery">
+                          <div class="charge"></div>
+                          <div class="tip"></div>
+                        </div>
+                      </div>
+
+                      <!-- Calculator Toggle -->
+                      <div id="calculatorToggle" class="calculator-toggle" title="Solar Calculator">
+                        <button><a href="calculator.html">Calculator</a></button>
+                      </div>
+                    </div>
+                </div>
+                
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Alert Container -->
+    <div class="alert-container" id="alert-container"></div>
+
+    <div class="container">
+        <div class="Header">
+            <h1><i class="fas fa-solar-panel"></i> Solar Energy Calculator</h1>
+            <p>Calculate your home's energy consumption and discover optimal solar solutions</p>
+        </div>
+        
+        <div class="calculator-container">
+            <div class="panel">
+                <div class="panel-title">
+                    <i class="fas fa-home"></i>
+                    <h2>Your Home Appliances</h2>
+                </div>
+                
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="tube-light-qty">Tube Lights</label>
+                        <input type="number" id="tube-light-qty" min="0" value="0" placeholder="Quantity">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="tube-light-hours">Usage Hours</label>
+                        <input type="number" id="tube-light-hours" min="0" max="24" step="0.5" value="0" placeholder="Hours/day">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="tube-light-wattage">Wattage Each</label>
+                        <input type="number" id="tube-light-wattage" min="0" value="0" placeholder="Watts">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="led-bulbs-qty">LED Bulbs</label>
+                        <input type="number" id="led-bulbs-qty" min="0" value="0" placeholder="Quantity">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="led-bulbs-hours">Usage Hours</label>
+                        <input type="number" id="led-bulbs-hours" min="0" max="24" step="0.5" value="0" placeholder="Hours/day">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="led-bulbs-wattage">Wattage Each</label>
+                        <input type="number" id="led-bulbs-wattage" min="0" value="0" placeholder="Watts">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="fans-qty">Fans</label>
+                        <input type="number" id="fans-qty" min="0" value="0" placeholder="Quantity">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="fans-hours">Usage Hours</label>
+                        <input type="number" id="fans-hours" min="0" max="24" step="0.5" value="0" placeholder="Hours/day">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="fans-wattage">Wattage Each</label>
+                        <input type="number" id="fans-wattage" min="0" value="0" placeholder="Watts">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="refrigerator-qty">Refrigerator</label>
+                        <input type="number" id="refrigerator-qty" min="0" value="0" placeholder="Quantity">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="refrigerator-hours">Usage Hours</label>
+                        <input type="number" id="refrigerator-hours" min="0" max="24" step="0.5" value="0" placeholder="Hours/day">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="refrigerator-wattage">Wattage Each</label>
+                        <input type="number" id="refrigerator-wattage" min="0" value="0" placeholder="Watts">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="ac-qty">Inverter ACs</label>
+                        <input type="number" id="ac-qty" min="0" value="0" placeholder="Quantity">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="ac-hours">Usage Hours</label>
+                        <input type="number" id="ac-hours" min="0" max="24" step="0.5" value="0" placeholder="Hours/day">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="ac-wattage">Wattage Each</label>
+                        <input type="number" id="ac-wattage" min="0" value="0" placeholder="Watts">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="motor-qty">High Volt Motors</label>
+                        <input type="number" id="motor-qty" min="0" value="0" placeholder="Quantity">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="motor-hours">Usage Hours</label>
+                        <input type="number" id="motor-hours" min="0" max="24" step="0.5" value="0" placeholder="Hours/day">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="motor-wattage">Wattage Each</label>
+                        <input type="number" id="motor-wattage" min="0" value="0" placeholder="Watts">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-title">
+                    <i class="fas fa-sun"></i>
+                    <h2>Solar Configuration</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label for="roof-area">Available Roof Area (sq ft)</label>
+                    <input type="number" id="roof-area" min="0" value="0" placeholder="Square feet">
+                </div>
+                
+                <div class="input-group">
+                    <label for="sun-hours">Daily Sun Hours</label>
+                    <input type="number" id="sun-hours" min="0" max="24" step="0.5" value="0" placeholder="Hours">
+                    <small>Average peak sunlight hours in your area</small>
+                </div>
+                
+                <div class="input-group">
+                    <label for="electricity-rate">Electricity Rate ($/kWh)</label>
+                    <input type="number" id="electricity-rate" min="0" step="0.01" value="0" placeholder="Dollars">
+                </div>
+                
+                <div class="input-group">
+                    <label for="budget">Budget ($)</label>
+                    <input type="number" id="budget" min="0" value="0" placeholder="Dollars">
+                </div>
+                
+                <div class="input-group">
+                    <label for="location">Your Location</label>
+                    <select id="location">
+                        <option value="sunny">Sunny (Southwest US, Middle East)</option>
+                        <option value="moderate" selected>Moderate (Most of US, Europe)</option>
+                        <option value="cloudy">Cloudy (Pacific Northwest, UK)</option>
+                    </select>
+                </div>
+                
+                <button id="calculate-btn" class="btn pulse">
+                    <i class="fas fa-bolt"></i> Calculate Solar Solution
+                </button>
+            </div>
+            
+            <div class="panel results-panel" id="results-panel" style="display: none;">
+                <div class="panel-title">
+                    <i class="fas fa-chart-pie"></i>
+                    <h2>Your Solar Analysis</h2>
+                </div>
+                
+                <div class="result-grid">
+                    <div class="result-card">
+                        <h3>Daily Consumption</h3>
+                        <div class="result-value" id="daily-consumption">0 kWh</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Required Solar</h3>
+                        <div class="result-value" id="required-solar">0 W</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Monthly Savings</h3>
+                        <div class="result-value" id="monthly-savings">$0</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Payback Period</h3>
+                        <div class="result-value" id="payback-period">0 years</div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-title">
+                        <span>Energy Covered by Solar</span>
+                        <span id="coverage-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="coverage-bar"></div>
+                    </div>
+                </div>
+                
+                <div class="panel-recommendation" id="panel-recommendation">
+                    <h3><i class="fas fa-star"></i> Recommended Solar Solution</h3>
+                    <p id="recommendation-text">Based on your consumption and roof area, we recommend the following solar panel system:</p>
+                    
+                    <div class="panel-options" id="panel-options">
+                        <!-- Filled by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="environmental-benefits">
+                    <h3><i class="fas fa-leaf"></i> Environmental Impact</h3>
+                    <p>Your solar installation will have these positive environmental effects:</p>
+                    
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4 id="co2-saved">CO2 Reduction</h4>
+                                <p>0 kg annually</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-tree"></i>
+                                                        </div>
+                            <div class="benefit-text">
+                                <h4 id="trees-saved">Trees Equivalent</h4>
+                                <p>0 trees planted</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-gas-pump"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4 id="oil-saved">Oil Not Burned</h4>
+                                <p>0 barrels</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4 id="miles-driven">Car Miles Offset</h4>
+                                <p>0 miles</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- FOOTER -->
+  <footer>
+    <div class="container fade-in-up">
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="logo">
+                    <div style="background: var(--secondary); color: var(--dark); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-right: 12px;">
+                        <a href="index.html#home" style=" color: inherit; text-decoration: none;">
+                            <i class="fas fa-sun fa-2x"></i></a>
+                    </div>
+                    <h1 style="color: white;"><a href="#home" style=" color: inherit; text-decoration: none;">
+                        SolarEco</a></h1>
+                </div>
+                <p style="margin: 20px 0; color: #adb5bd;">Providing sustainable solar solutions for homes and businesses since 2010.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://pk.linkedin.com/company/sign-in-private-limited"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="residentialsolar.html">Residential Solar</a></li>
+                    <li><a href="comercia.solar.html">Commercial Solar</a></li>
+                    <li><a href="installtion.html">Solar Installation</a></li>
+                    <li><a href="maintainance.html">Maintenance & Repair</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Subscribe</h3>
+                <p style="color: #adb5bd; margin-bottom: 20px;">Subscribe to our Page for the latest updates and offers.</p>
+                <form id="subscribeForm">
+                    <div class="form-group">
+                        <input type="email" id="footerEmail" class="form-control" placeholder="Your Email Address" required>
+                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2010 SolarEco. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <!-- Thank You Alert Box -->
+    <div id="thankYouAlert" class="alert-overlay">
+        <div class="alert-box">
+            <div class="alert-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="alert-title">Thank You!</h2>
+            <p class="alert-message">Thank you for subscribing to our newsletter. You'll receive our latest updates and offers soon.</p>
+            <button class="alert-button" onclick="closeAlert()">Continue</button>
+        </div>
+    </div>
+</footer>
+
+    
+    <!-- Chat Toggle Button -->
+    <div class="chat-toggle" id="chat-toggle">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container hidden" id="chat-container">
+        <div class="chat-header">
+            <h3>Live Support</h3>
+            <button class="close-btn" id="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                Hello! How can I help you today?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Type your message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+
+        //  MOBILE MENU
+        // Mobile menu toggle - updated for new structure
+const mobileMenuBtn = document.querySelector('.mobile-menu');
+const navContainer = document.querySelector('.nav-container');
+
+mobileMenuBtn.addEventListener('click', () => {
+    navContainer.classList.toggle('active');
+});
+
+// Close menu when clicking on links
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navContainer.classList.remove('active');
+    });
+});
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const resultsPanel = document.getElementById('results-panel');
+            
+            // Sample solar panel data
+            const solarPanels = [
+                {
+                    name: "SunPower X-Series",
+                    power: 400,
+                    efficiency: 22.8,
+                    size: 21.5,
+                    price: 350,
+                    bestFor: "High efficiency, limited space"
+                },
+                {
+                    name: "LG Neon R",
+                    power: 380,
+                    efficiency: 21.7,
+                    size: 20.3,
+                    price: 320,
+                    bestFor: "Great balance of price and performance"
+                },
+                {
+                    name: "Panasonic HIT",
+                    power: 330,
+                    efficiency: 19.7,
+                    size: 19.1,
+                    price: 280,
+                    bestFor: "Reliable performance in all conditions"
+                },
+                {
+                    name: "Canadian Solar HiKu",
+                    power: 450,
+                    efficiency: 20.3,
+                    size: 23.5,
+                    price: 290,
+                    bestFor: "Large roofs, cost-effective"
+                }
+            ];
+            
+            // Alert system functions
+            function showAlert(message, type = 'error') {
+                const alertContainer = document.getElementById('alert-container');
+                const alertId = 'alert-' + Date.now();
+                
+                const alert = document.createElement('div');
+                alert.className = `alert alert-${type}`;
+                alert.id = alertId;
+                alert.innerHTML = `
+                    <div class="alert-icon">
+                        <i class="fas ${type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle'}"></i>
+                    </div>
+                    <div class="alert-message">${message}</div>
+                    <div class="alert-close" onclick="closeAlert('${alertId}')">
+                        <i class="fas fa-times"></i>
+                    </div>
+                `;
+                
+                alertContainer.appendChild(alert);
+                
+                // Show alert with animation
+                setTimeout(() => {
+                    alert.classList.add('show');
+                }, 10);
+                
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    closeAlert(alertId);
+                }, 5000);
+                
+                return alertId;
+            }
+            
+            window.closeAlert = function(alertId) {
+                const alert = document.getElementById(alertId);
+                if (alert) {
+                    alert.classList.remove('show');
+                    alert.classList.add('hide');
+                    
+                    // Remove from DOM after animation completes
+                    setTimeout(() => {
+                        if (alert.parentNode) {
+                            alert.parentNode.removeChild(alert);
+                        }
+                    }, 300);
+                }
+            };
+            
+            // Highlight input fields with errors
+            function highlightInput(inputId) {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.classList.add('input-error');
+                    input.classList.add('input-highlight');
+                    
+                    // Scroll to the input
+                    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Remove highlight after animation
+                    setTimeout(() => {
+                        input.classList.remove('input-highlight');
+                    }, 1500);
+                }
+            }
+            
+            // Validation function
+            function validateInputs() {
+                let isValid = true;
+                let errorMessage = '';
+                let firstErrorField = null;
+                
+                // Check if at least one appliance has data
+                const applianceTypes = ['tube-light', 'led-bulbs', 'fans', 'refrigerator', 'ac', 'motor'];
+                let hasApplianceData = false;
+                
+                for (const type of applianceTypes) {
+                    const qty = parseFloat(document.getElementById(`${type}-qty`).value) || 0;
+                    const hours = parseFloat(document.getElementById(`${type}-hours`).value) || 0;
+                    const wattage = parseFloat(document.getElementById(`${type}-wattage`).value) || 0;
+                    
+                    if (qty > 0 && hours > 0 && wattage > 0) {
+                        hasApplianceData = true;
+                        break;
+                    }
+                }
+                
+                if (!hasApplianceData) {
+                    isValid = false;
+                    errorMessage = 'Please enter data for at least one appliance (quantity, hours, and wattage).';
+                    firstErrorField = 'tube-light-qty';
+                }
+                
+                // Check solar configuration inputs
+                const roofArea = parseFloat(document.getElementById('roof-area').value) || 0;
+                const sunHours = parseFloat(document.getElementById('sun-hours').value) || 0;
+                
+                if (isValid && roofArea <= 0) {
+                    isValid = false;
+                    errorMessage = 'Please enter your available roof area.';
+                    firstErrorField = 'roof-area';
+                }
+                
+                if (isValid && sunHours <= 0) {
+                    isValid = false;
+                    errorMessage = 'Please enter average daily sun hours for your location.';
+                    firstErrorField = 'sun-hours';
+                }
+                
+                // Show error message and highlight first error field
+                if (!isValid) {
+                    showAlert(errorMessage, 'error');
+                    if (firstErrorField) {
+                        highlightInput(firstErrorField);
+                    }
+                }
+                
+                return isValid;
+            }
+            
+            // Remove error highlighting when user starts typing
+            const allInputs = document.querySelectorAll('input');
+            allInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    this.classList.remove('input-error');
+                });
+            });
+            
+            calculateBtn.addEventListener('click', function() {
+                // Validate inputs before calculation
+                if (!validateInputs()) {
+                    return;
+                }
+                
+                calculateSolarSolution();
+            });
+            
+            function calculateSolarSolution() {
+                // Show loading animation
+                calculateBtn.innerHTML = '<i class="fas fa-spinner rotate"></i> Calculating...';
+                calculateBtn.classList.remove('pulse');
+                
+                // Get appliance inputs
+                const appliances = {
+                    tubeLight: getApplianceData('tube-light'),
+                    ledBulbs: getApplianceData('led-bulbs'),
+                    fans: getApplianceData('fans'),
+                    refrigerator: getApplianceData('refrigerator'),
+                    ac: getApplianceData('ac'),
+                    motor: getApplianceData('motor')
+                };
+                
+                // Get solar configuration
+                const roofArea = parseFloat(document.getElementById('roof-area').value) || 0;
+                const sunHours = parseFloat(document.getElementById('sun-hours').value) || 0;
+                const electricityRate = parseFloat(document.getElementById('electricity-rate').value) || 0;
+                const budget = parseFloat(document.getElementById('budget').value) || 0;
+                const location = document.getElementById('location').value;
+                
+                // Adjust sun hours based on location
+                let locationFactor = 1;
+                if (location === 'sunny') locationFactor = 1.2;
+                if (location === 'cloudy') locationFactor = 0.8;
+                
+                const effectiveSunHours = sunHours * locationFactor;
+                
+                // Calculate total daily consumption in watt-hours
+                let totalConsumptionWh = 0;
+                
+                for (const appliance in appliances) {
+                    totalConsumptionWh += appliances[appliance].qty * 
+                                        appliances[appliance].hours * 
+                                        appliances[appliance].wattage;
+                }
+                
+                // Convert to kWh
+                const totalConsumptionKwh = totalConsumptionWh / 1000;
+                
+                // Calculate required solar system size (in Watts)
+                // Assuming 30% system losses (inverter, wiring, etc.)
+                const requiredSolarWatts = effectiveSunHours > 0 ? (totalConsumptionWh / (effectiveSunHours * 0.7)) : 0;
+                
+                // Calculate potential savings
+                const dailySavings = totalConsumptionKwh * electricityRate;
+                const monthlySavings = dailySavings * 30;
+                const annualSavings = dailySavings * 365;
+                
+                // Calculate payback period (simple calculation)
+                const systemCost = requiredSolarWatts * 3; // Approx $3 per watt installed
+                const paybackYears = annualSavings > 0 ? (systemCost / annualSavings) : 0;
+                
+                // Calculate environmental benefits
+                // 1 kWh solar prevents ~0.7 kg CO2 emissions
+                const co2Saved = annualSavings * 0.7;
+                // Average tree absorbs ~21.77 kg CO2 per year
+                const treesEquivalent = Math.round(co2Saved / 21.77);
+                // 1 kWh = 0.00059 barrels of oil equivalent
+                const oilSaved = annualSavings * 0.00059;
+                // Average car emits ~0.4 kg CO2 per mile
+                const milesDriven = Math.round(co2Saved / 0.4);
+                
+                // Find suitable panels based on roof area and required power
+                const suitablePanels = findSuitablePanels(requiredSolarWatts, roofArea, budget);
+                
+                // Update UI after calculations (with slight delay for animation)
+                setTimeout(() => {
+                    updateResults(
+                        totalConsumptionKwh, 
+                        requiredSolarWatts, 
+                        monthlySavings, 
+                        paybackYears,
+                        co2Saved,
+                        treesEquivalent,
+                        oilSaved,
+                        milesDriven,
+                        suitablePanels
+                    );
+                    
+                    // Restore calculate button
+                    calculateBtn.innerHTML = '<i class="fas fa-bolt"></i> Calculate Solar Solution';
+                    calculateBtn.classList.add('pulse');
+                }, 1000);
+            }
+            
+            function getApplianceData(prefix) {
+                return {
+                    qty: parseFloat(document.getElementById(`${prefix}-qty`).value) || 0,
+                    hours: parseFloat(document.getElementById(`${prefix}-hours`).value) || 0,
+                    wattage: parseFloat(document.getElementById(`${prefix}-wattage`).value) || 0
+                };
+            }
+            
+            function findSuitablePanels(requiredWatts, roofArea, budget) {
+                // Filter panels that can meet the required watts within the roof area and budget
+                const maxPanels = Math.floor(roofArea / 20); // Approx 20 sq ft per panel
+                
+                return solarPanels
+                    .map(panel => {
+                        // Calculate how many panels would be needed
+                        const panelsNeeded = panel.power > 0 ? Math.ceil(requiredWatts / panel.power) : 0;
+                        const totalSize = panelsNeeded * panel.size;
+                        const totalCost = panelsNeeded * panel.price;
+                        
+                        // Calculate coverage percentage (how much of the requirement this panel meets)
+                        const coverage = panel.power > 0 ? Math.min(100, (panelsNeeded * panel.power) / requiredWatts * 100) : 0;
+                        
+                        return {
+                            ...panel,
+                            panelsNeeded,
+                            totalSize,
+                            totalCost,
+                            coverage,
+                            withinBudget: totalCost <= budget,
+                            fitsRoof: totalSize <= roofArea
+                        };
+                    })
+                    .sort((a, b) => {
+                        // Sort by best coverage within budget and roof
+                        if (a.withinBudget && !b.withinBudget) return -1;
+                        if (!a.withinBudget && b.withinBudget) return 1;
+                        if (a.fitsRoof && !b.fitsRoof) return -1;
+                        if (!a.fitsRoof && b.fitsRoof) return 1;
+                        return b.coverage - a.coverage;
+                    });
+            }
+            
+            function updateResults(
+                consumption, 
+                requiredSolar, 
+                monthlySavings, 
+                paybackYears,
+                co2Saved,
+                treesEquivalent,
+                oilSaved,
+                milesDriven,
+                suitablePanels
+            ) {
+                // Show results panel with animation
+                resultsPanel.style.display = 'block';
+                resultsPanel.style.animation = 'fadeIn 1s ease';
+                
+                // Update basic results
+                document.getElementById('daily-consumption').textContent = consumption.toFixed(1) + ' kWh';
+                document.getElementById('required-solar').textContent = Math.round(requiredSolar) + ' W';
+                document.getElementById('monthly-savings').textContent = '$' + monthlySavings.toFixed(2);
+                document.getElementById('payback-period').textContent = paybackYears.toFixed(1) + ' years';
+                
+                // Update coverage percentage with animation
+                const coveragePercent = requiredSolar > 0 ? Math.min(100, (requiredSolar / (requiredSolar * 1.3)) * 100) : 0;
+                document.getElementById('coverage-percent').textContent = coveragePercent.toFixed(0) + '%';
+                document.getElementById('coverage-bar').style.width = coveragePercent + '%';
+                
+                // Update environmental benefits
+                document.getElementById('co2-saved').textContent = Math.round(co2Saved) + ' kg annually';
+                document.getElementById('trees-saved').textContent = treesEquivalent + ' trees planted';
+                document.getElementById('oil-saved').textContent = oilSaved.toFixed(2) + ' barrels';
+                document.getElementById('miles-driven').textContent = milesDriven + ' miles';
+                
+                // Update panel recommendations
+                const panelOptions = document.getElementById('panel-options');
+                panelOptions.innerHTML = '';
+                
+                if (requiredSolar > 0 && roofArea > 0) {
+                    suitablePanels.slice(0, 3).forEach(panel => {
+                        const panelElement = document.createElement('div');
+                        panelElement.className = 'panel-option';
+                        panelElement.innerHTML = `
+                            <h4>${panel.name}</h4>
+                            <div class="panel-specs">
+                                <p><strong>${panel.power}W</strong> per panel</p>
+                                <p><strong>${panel.efficiency}%</strong> efficiency</p>
+                                <p>${panel.size} sq ft each</p>
+                                <p>${panel.panelsNeeded} panels needed</p>
+                                <p><strong>$${panel.totalCost.toFixed(0)}</strong> estimated cost</p>
+                            </div>
+                            <p><em>Best for: ${panel.bestFor}</em></p>
+                        `;
+                        
+                        if (!panel.withinBudget) {
+                            panelElement.style.borderTop = '3px solid var(--accent)';
+                            const warning = document.createElement('p');
+                            warning.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Over budget';
+                            warning.style.color = 'var(--accent)';
+                            warning.style.marginTop = '0.5rem';
+                            panelElement.appendChild(warning);
+                        }
+                        
+                        if (!panel.fitsRoof) {
+                            panelElement.style.borderTop = '3px solid var(--accent)';
+                            const warning = document.createElement('p');
+                            warning.innerHTML = '<i class="fas fa-exclamation-triangle"></i> May not fit roof';
+                            warning.style.color = 'var(--accent)';
+                            warning.style.marginTop = '0.5rem';
+                            panelElement.appendChild(warning);
+                        }
+                        
+                        panelOptions.appendChild(panelElement);
+                    });
+                } else {
+                    panelOptions.innerHTML = '<p>Please enter your energy consumption and roof area to see recommendations</p>';
+                }
+                
+                // Scroll to results
+                resultsPanel.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    navLinks.classList.remove('active');
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Sticky header
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                header.classList.toggle('sticky', window.scrollY > 0);
+            });
+
+            // Chat functionality
+            const chatToggle = document.getElementById('chat-toggle');
+            const chatContainer = document.getElementById('chat-container');
+            const closeBtn = document.getElementById('close-btn');
+            const messageInput = document.getElementById('message-input');
+            const sendBtn = document.getElementById('send-btn');
+            const chatMessages = document.getElementById('chat-messages');
+
+            // Toggle Chat
+            chatToggle.addEventListener('click', () => {
+                chatContainer.classList.toggle('hidden');
+            });
+
+            // Close Chat
+            closeBtn.addEventListener('click', () => {
+                chatContainer.classList.add('hidden');
+            });
+
+            function sendMessage() {
+                const message = messageInput.value.trim();
+                if (message !== '') {
+                    addMessage(message, 'user-message');
+                    messageInput.value = '';
+
+                    // Bot keyword-based replies
+                    let response = "Thanks for your message! Our team will respond shortly.";
+
+                    const msg = message.toLowerCase();
+
+                    if (msg.includes("price") || msg.includes("cost")) {
+                        response = "Our solar panel packages start at affordable rates. Would you like a detailed quote?";
+                    } else if (msg.includes("installation")) {
+                        response = "We provide professional installation services across supported countries.";
+                    } else if (msg.includes("countries") || msg.includes("available in")) {
+                        response = "We currently operate in 18+ countries including the US, UK, Canada, Australia, and more!";
+                    } else if (msg.includes("time") || msg.includes("delivery")) {
+                        response = "Your solar quote and system details will be delivered to your email within 12–24 hours after request.";
+                    } else if (msg.includes("report") || msg.includes("vehicle")) {
+                        response = "Please share your location and contact details so we can prepare a customized solar solution for you.";
+                    } else if (msg.includes("hello") || msg.includes("hi")) {
+                        response = "Hello! 👋 How can we assist you with your solar needs today?";
+                    }
+
+                    setTimeout(() => {
+                        addMessage(response, 'bot-message');
+                    }, 800);
+                }
+            }
+
+            sendBtn.addEventListener('click', sendMessage);
+
+            messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            function addMessage(text, className) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', className);
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Theme toggle functionality
+            const toggle = document.getElementById("batteryToggle");
+            const body = document.body;
+            
+            // Check for saved theme preference or respect OS preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                body.setAttribute('data-theme', 'dark');
+            } else {
+                body.removeAttribute('data-theme');
+            }
+
+            toggle.addEventListener("click", function () {
+                if (body.getAttribute('data-theme') === 'dark') {
+                    body.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
